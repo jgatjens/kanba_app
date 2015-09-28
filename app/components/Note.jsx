@@ -31,7 +31,16 @@ export default class Note extends React.Component {
       onKeyPress={this.checkEnter} />;
   }
   renderTask() {
-    return <div onClick={this.edit}>{this.props.task}</div>;
+    const onDelete = this.props.onDelete;
+
+    return (
+      <div onClick={this.edit}>
+        <span className='task'>
+          {this.props.task}
+        </span>
+        {onDelete ? this.renderDelete() : null }
+      </div>
+    );
   }
   edit() {
     this.setState({
@@ -49,5 +58,8 @@ export default class Note extends React.Component {
     this.setState({
       editing: false
     });
+  }
+  renderDelete() {
+    return <button className="delete" onClick={this.props.onDelete}>x</button>
   }
 }
